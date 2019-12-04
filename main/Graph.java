@@ -92,7 +92,7 @@ public class Graph implements Iterable<Edge>{
 
 	public Arc hasArc(int fromVertex, Edge e) {
 		for (Arc a : this.outAdjacency.get(fromVertex)) {
-			if (a.support == e) return a;
+			if (a.edge == e) return a;
 		}
 		return null;
 	}
@@ -122,7 +122,6 @@ public class Graph implements Iterable<Edge>{
 
 	}
 
-
 	private class EdgeIterator implements Iterator<Edge>{
 
 		Iterator<LinkedList<Arc>> vertexIt;
@@ -146,7 +145,7 @@ public class Graph implements Iterable<Edge>{
 		}
 
 		public Edge next() {
-			return arcIt.next().support;
+			return arcIt.next().edge;
 		}
 
 		public void remove() {

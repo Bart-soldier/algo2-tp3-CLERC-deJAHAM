@@ -303,7 +303,7 @@ public class RootedTree {
 		Graph graph = new Graph(order);
 		for (Edge e : edges) graph.addEdge(e);
 
-		createTree(root, BreadthFirstSearch.generateTree(graph, root));
+		createTree(root, BreadthFirstSearch.generateSpanningTree(graph, root));
 		
 		rerootTree();
 		computeAllHeights();

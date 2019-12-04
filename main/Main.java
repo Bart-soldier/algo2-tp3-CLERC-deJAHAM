@@ -1,30 +1,22 @@
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 
-public class MainStub {
+public class Main {
 
 	@SuppressWarnings("unused")
 	private final static Random gen = new Random();
 	
-	public static ArrayList<Edge> genTree(Graph graph) {
-		ArrayList<Edge> randomTree;
-		
-		// TOOO : modifier l'algorithme utiliser ici.
+	public static ArrayList<Edge> generateBFSSpanningTree(Graph graph) {
+		ArrayList<Edge> randomTree = new ArrayList<>();
 		
 		// Non-random BFS
-		ArrayList<Arc> randomArcTree = 
-				BreadthFirstSearch.generateTree(graph,0);
-		randomTree = new ArrayList<>();
-		for (Arc a : randomArcTree) randomTree.add(a.support);
-	
-		
-		
+		ArrayList<Arc> BFSSpanningTree = BreadthFirstSearch.generateSpanningTree(graph, 0);
+
+		for (Arc arc : BFSSpanningTree) randomTree.add(arc.edge);
+
 		return randomTree;
 	}
 	
@@ -53,7 +45,7 @@ public class MainStub {
 
 		long startingTime = System.nanoTime();
 		for (int i = 0; i < nbrOfSamples; i++) {
-			randomTree= genTree(graph);
+			randomTree = generateBFSSpanningTree(graph);
 
 			rooted = new RootedTree(randomTree,0);
 //			rooted.printStats();

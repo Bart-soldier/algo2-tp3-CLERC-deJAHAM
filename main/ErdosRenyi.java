@@ -12,7 +12,7 @@ public class ErdosRenyi {
 	
 	private boolean isConnected() {
 		if (graph == null) return false;
-		ArrayList<Arc> tree = BreadthFirstSearch.generateTree(graph, 0);
+		ArrayList<Arc> tree = BreadthFirstSearch.generateSpanningTree(graph, 0);
 		return tree.size() == order - 1;
 		
 	}
