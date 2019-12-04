@@ -1,9 +1,10 @@
+package src.graphTools;
 
 public class Edge implements Comparable<Edge> {
 
-	protected int source;
-	protected int dest;
-	double weight;
+	public int source;
+	public int dest;
+	public double weight;
 	
 	public Edge(int source, int dest, double weight) {
 		this.source = source;

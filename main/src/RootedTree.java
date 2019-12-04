@@ -1,3 +1,10 @@
+package src;
+
+import src.graphTools.Arc;
+import src.graphTools.Edge;
+import src.graphTools.Graph;
+import src.spanningTree.BreadthFirstSearch;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;

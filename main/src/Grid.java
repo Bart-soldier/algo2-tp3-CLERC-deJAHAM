@@ -1,3 +1,8 @@
+package src;
+
+import src.graphTools.Edge;
+import src.graphTools.Graph;
+
 import java.util.BitSet;
 
 

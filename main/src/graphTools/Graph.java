@@ -1,3 +1,5 @@
+package src.graphTools;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -6,12 +8,12 @@ import java.util.List;
 
 public class Graph implements Iterable<Edge>{
 
-	int order;
-	int edgeCardinality;
+	public int order;
+	public int edgeCardinality;
 
-	ArrayList<LinkedList<Edge>> adjacency;
-	ArrayList<LinkedList<Arc>> inAdjacency;
-	ArrayList<LinkedList<Arc>> outAdjacency;
+	public ArrayList<LinkedList<Edge>> adjacency;
+	public ArrayList<LinkedList<Arc>> inAdjacency;
+	public ArrayList<LinkedList<Arc>> outAdjacency;
 
 	public boolean isVertex(int index) {
 		return adjacency.size() > index && adjacency.get(index) != null;

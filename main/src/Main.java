@@ -1,3 +1,10 @@
+package src;
+
+import src.graphTools.Arc;
+import src.graphTools.Edge;
+import src.graphTools.Graph;
+import src.spanningTree.BreadthFirstSearch;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,16 +29,17 @@ public class Main {
 	
 	
 	public static void main(String argv[]) throws InterruptedException {
-
 		Grid grid = null;
 		grid = new Grid(1920/11,1080/11);
+
+
 		Graph graph = grid.graph;
 		
-//		Graph graph = new Complete(400).graph;
+		//src.graphTools.Graph graph = new src.Complete(400).graph;
 		
-//		Graph graph = new ErdosRenyi(1_000, 100).graph;
+		//src.graphTools.Graph graph = new src.ErdosRenyi(1_000, 100).graph;
 
-//		Graph graph = new Lollipop(1_000).graph;
+		//src.graphTools.Graph graph = new src.Lollipop(1_000).graph;
 		
 		int nbrOfSamples = 10;
 		int diameterSum = 0;
@@ -48,7 +56,7 @@ public class Main {
 			randomTree = generateBFSSpanningTree(graph);
 
 			rooted = new RootedTree(randomTree,0);
-//			rooted.printStats();
+			// rooted.printStats();
 			diameterSum = diameterSum + rooted.getDiameter();
 			eccentricitySum = eccentricitySum + rooted.getAverageEccentricity();
 			wienerSum = wienerSum + rooted.getWienerIndex();
@@ -87,8 +95,8 @@ public class Main {
 		final Labyrinth laby = new Labyrinth(grid, rooted);
 
 		laby.setStyleBalanced();
-//		laby.setShapeBigNodes();
-//		laby.setShapeSmallAndFull();
+		// laby.setShapeBigNodes();
+		// laby.setShapeSmallAndFull();
 		laby.setShapeSmoothSmallNodes();
 		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,13 +113,12 @@ public class Main {
 		window.setVisible(true);
 		
 		// Pour générer un fichier image.
-//		try {
-//			laby.saveImage("resources/random.png");
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-
+		/*
+		try {
+			laby.saveImage("resources/random.png");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		*/
 	}
-	
-	
 }

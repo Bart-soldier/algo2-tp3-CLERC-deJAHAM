@@ -1,7 +1,8 @@
+package src.graphTools;
 
 public class Arc {
-	Edge edge;
-	boolean reversed;
+	public Edge edge;
+	public boolean reversed;
 	
 	public Arc(Edge e, boolean reversed) {
 		this.edge = e;

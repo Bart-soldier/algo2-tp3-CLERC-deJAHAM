@@ -1,6 +1,10 @@
+package src;
+
+import src.graphTools.Arc;
+import src.graphTools.Graph;
+
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.LinkedList;
 import java.util.Stack;
 
 

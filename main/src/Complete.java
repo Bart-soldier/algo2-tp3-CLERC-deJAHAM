@@ -1,3 +1,7 @@
+package src;
+
+import src.graphTools.Edge;
+import src.graphTools.Graph;
 
 public class Complete {
 
