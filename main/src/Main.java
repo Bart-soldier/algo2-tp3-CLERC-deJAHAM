@@ -4,6 +4,7 @@ import src.graphTools.Arc;
 import src.graphTools.Edge;
 import src.graphTools.Graph;
 import src.spanningTree.BreadthFirstSearch;
+import src.spanningTree.MinimumSpanningTree;
 import src.spanningTree.RandomBreadthFirstSearch;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class Main {
 	
 	public static void main(String argv[]) throws InterruptedException {
 
+
 	    Graph graph = new Graph(8);
 	    graph.addVertex(0);
 	    graph.addVertex(1);
@@ -55,9 +57,33 @@ public class Main {
 	    graph.addEdge(new Edge(7, 8, 0));
 
 
-	    //ArrayList<Edge> testList = GenerateBFSSpanningTree(graph);
-	    ArrayList<Edge> testList = RandomBreadthFirstSearch.SpanningTree(graph);
+		/*
+		Graph graph = new Graph(4);
+		graph.addVertex(0);
+		graph.addVertex(1);
+		graph.addVertex(2);
+		graph.addVertex(3);
+		graph.addEdge(new Edge(0, 1, 0));
+		graph.addEdge(new Edge(1, 2, 0));
+		graph.addEdge(new Edge(2, 3, 0));
+		graph.addEdge(new Edge(3, 0, 0));
+		graph.addEdge(new Edge(0, 2, 0));
+		graph.addEdge(new Edge(1, 3, 0));
+		*/
 
+
+	    //ArrayList<Edge> testList = GenerateBFSSpanningTree(graph);
+	    //ArrayList<Edge> testList = RandomBreadthFirstSearch.SpanningTree(graph);
+	    ArrayList<Edge> testList = MinimumSpanningTree.SpanningTree(graph);
+
+		System.out.println("\nGraph :\n");
+	    for (int i = 0 ; i < graph.order; i++) {
+			for (Edge edge : graph.adjacency.get(i)) {
+				System.out.println("Edge from " + edge.source + " to " + edge.dest + " with weight " + edge.weight);
+			}
+		}
+
+		System.out.println("\nSpanning Tree :\n");
 	    for(Edge edge : testList) {
             System.out.println("Edge from " + edge.source + " to " + edge.dest);
         }

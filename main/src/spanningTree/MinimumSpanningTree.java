@@ -9,20 +9,22 @@ import src.graphTools.Graph;
 
 /**
  * 3.1 Arbres couvrant de poids minimum aléatoire
+ *
+ * L'arbre obtenu n'est pas optimal étant donné qu'il n'existe que deux valeurs différentes comme poid (0 ou 1)
  */
 
 public class MinimumSpanningTree {
 
     public static ArrayList<Edge> SpanningTree(Graph graph) {
-        // Create empty spanning tree
-        ArrayList<Edge> spanningTree = new ArrayList<>();
-
         // For each vertex in the graph
         for(int vertex = 0 ; vertex < graph.order; vertex++) {
             // For each edge of that vertex
             for(Edge edge : graph.adjacency.get(vertex)) {
-                // Set weight to a random number between [0, 1]
-                edge.weight = Math.random() * 2;
+                // If the vertex is equal to the source of the edge (to avoid setting twice a random number)
+                if(vertex == edge.source) {
+                    // Set weight to a random number between [0, 1]
+                    edge.weight = (int) (Math.random() * 10);
+                }
             }
         }
 
@@ -33,7 +35,7 @@ public class MinimumSpanningTree {
     private static ArrayList<Edge> primAlgorithm(Graph graph)
     {
         // Random source
-        int source = (int) (Math.random() * (graph.order - 1));
+        int source = (int) (Math.random() * graph.order);
 
         // List of edges in the order of the node's discovery
         ArrayList<Edge> minimumSpanningTree = new ArrayList<>();
@@ -41,49 +43,60 @@ public class MinimumSpanningTree {
         // Mark all the vertices as not discovered
         boolean[] discovered = new boolean[graph.order];
 
-        // Create a queue for the algorithm
-        LinkedList<Integer> queue = new LinkedList<>();
+        // Create a list for all of the edges going out of the cut
+        ArrayList<Edge> outgoingEdgesOfCut = new ArrayList<>();
 
-        // Mark the current node as discovered and enqueue it
+        // Mark the current node as discovered
         discovered[source] = true;
-        queue.add(source);
+        // And add each edge connected to the current vertex to the outgoingEdgesOfCut
+        outgoingEdgesOfCut.addAll(graph.adjacency.get(source));
 
-        // While there are still some nodes in the queue
-        while (queue.size() != 0)
+        // While there are still some edges in the cut
+        while (outgoingEdgesOfCut.size() != 0)
         {
-            // Dequeue a vertex from queue
-            source = queue.poll();
+            double currentEdgeWeight;
+            double minWeight = 1000;
+            Edge edge = null;
 
-            // Reset weight variables
-            double outgoingArcOfSourceWeight;
-            double minWeight = -1;
-            int destination = -1;
 
-            // Look at every arc going out of that vertex
-            for(Arc outgoingArcOfSource : graph.outAdjacency.get(source)) {
-                // If this arc's destination has not been discovered yet
-                if(!discovered[outgoingArcOfSource.edge.dest]) {
-                    // Get its weight
-                    outgoingArcOfSourceWeight = Math.min(minWeight, outgoingArcOfSource.edge.weight);
-
-                    // Check if outgoingArcOfSource's weight is strictly smaller than the current minWeight
-                    if (outgoingArcOfSourceWeight < minWeight) {
-                        // If so, set the outgoingArcOfSource's weight as the new minWeight
-                        minWeight = outgoingArcOfSourceWeight;
-                        // And set outgoingArcOfSource's destination as the new destination
-                        destination = outgoingArcOfSource.edge.dest;
+            // For each edge going out of the cut
+            for(int i = 0; i < outgoingEdgesOfCut.size(); i++) {
+                // If we have not yet discovered either the source of the destination of the edge
+                if(!discovered[outgoingEdgesOfCut.get(i).source] || !discovered[outgoingEdgesOfCut.get(i).dest]) {
+                    currentEdgeWeight = outgoingEdgesOfCut.get(i).weight;
+                    // If the current edge's weight is strictly smaller than the previously recorded minWeight
+                    if(currentEdgeWeight < minWeight) {
+                        // Then update the values
+                        minWeight = currentEdgeWeight;
+                        edge = outgoingEdgesOfCut.get(i);
                     }
+                }
+                // Otherwise, if we have discovered both, we can remove the edge from the list
+                else {
+                    outgoingEdgesOfCut.remove(i);
+                    i--;
                 }
             }
 
-            // If we have found a destination
-            if(destination != -1) {
-                // Add the edge to the minimum spanning tree
-                minimumSpanningTree.add(new Edge(source, destination, 0));
-                // Set the destination as discovered
-                discovered[destination] = true;
-                // Add the destination to the queue
-                queue.add(destination);
+            // If you have found a minimum weight
+            if(edge != null) {
+                // If it was the source that was not discovered
+                if(!discovered[edge.source]) {
+                    // You mark the source as discovered
+                    discovered[edge.source] = true;
+                    // You add the source's edge to the outgoingEdgesOfCut
+                    outgoingEdgesOfCut.addAll(graph.adjacency.get(edge.source));
+                }
+                // If it was the destination that was not discovered
+                else {
+                    // You mark the destination as discovered
+                    discovered[edge.dest] = true;
+                    // You add the destination's edge to the outgoingEdgesOfCut
+                    outgoingEdgesOfCut.addAll(graph.adjacency.get(edge.dest));
+                }
+
+                // And finally you add the edge to the minimum spanning tree
+                minimumSpanningTree.add(edge);
             }
         }
 
