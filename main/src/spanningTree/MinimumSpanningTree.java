@@ -13,16 +13,16 @@ import src.graphTools.Graph;
 
 public class MinimumSpanningTree {
 
-    public ArrayList<Edge> SpanningTreeMinimumWeight(Graph graph) {
+    public static ArrayList<Edge> SpanningTree(Graph graph) {
         // Create empty spanning tree
-        ArrayList<Edge> SpanningTree = new ArrayList<>();
+        ArrayList<Edge> spanningTree = new ArrayList<>();
 
         // For each vertex in the graph
         for(int vertex = 0 ; vertex < graph.order; vertex++) {
             // For each edge of that vertex
             for(Edge edge : graph.adjacency.get(vertex)) {
                 // Set weight to a random number between [0, 1]
-                edge.weight = Math.random() * 1;
+                edge.weight = Math.random() * 2;
             }
         }
 
@@ -33,9 +33,9 @@ public class MinimumSpanningTree {
     private static ArrayList<Edge> primAlgorithm(Graph graph)
     {
         // Random source
-        int source = (int) Math.random() * (graph.order - 1);
+        int source = (int) (Math.random() * (graph.order - 1));
 
-        // List of arcs in the order of the node's discovery
+        // List of edges in the order of the node's discovery
         ArrayList<Edge> minimumSpanningTree = new ArrayList<>();
 
         // Mark all the vertices as not discovered

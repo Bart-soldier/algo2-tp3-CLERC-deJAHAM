@@ -4,6 +4,7 @@ import src.graphTools.Arc;
 import src.graphTools.Edge;
 import src.graphTools.Graph;
 import src.spanningTree.BreadthFirstSearch;
+import src.spanningTree.RandomBreadthFirstSearch;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class Main {
 	@SuppressWarnings("unused")
 	private final static Random gen = new Random();
 	
-	public static ArrayList<Edge> generateBFSSpanningTree(Graph graph) {
+	public static ArrayList<Edge> GenerateBFSSpanningTree(Graph graph) {
 		ArrayList<Edge> randomTree = new ArrayList<>();
 		
 		// Non-random BFS
@@ -29,6 +30,40 @@ public class Main {
 	
 	
 	public static void main(String argv[]) throws InterruptedException {
+
+	    Graph graph = new Graph(8);
+	    graph.addVertex(0);
+	    graph.addVertex(1);
+	    graph.addVertex(2);
+	    graph.addVertex(3);
+	    graph.addVertex(4);
+	    graph.addVertex(5);
+	    graph.addVertex(6);
+	    graph.addVertex(7);
+	    graph.addVertex(8);
+	    graph.addEdge(new Edge(0, 1, 0));
+	    graph.addEdge(new Edge(1, 2, 0));
+	    graph.addEdge(new Edge(0, 3, 0));
+	    graph.addEdge(new Edge(1, 4, 0));
+	    graph.addEdge(new Edge(2, 5, 0));
+	    graph.addEdge(new Edge(3, 4, 0));
+	    graph.addEdge(new Edge(4, 5, 0));
+	    graph.addEdge(new Edge(3, 6, 0));
+	    graph.addEdge(new Edge(4, 7, 0));
+	    graph.addEdge(new Edge(5, 8, 0));
+	    graph.addEdge(new Edge(6, 7, 0));
+	    graph.addEdge(new Edge(7, 8, 0));
+
+
+	    //ArrayList<Edge> testList = GenerateBFSSpanningTree(graph);
+	    ArrayList<Edge> testList = RandomBreadthFirstSearch.SpanningTree(graph);
+
+	    for(Edge edge : testList) {
+            System.out.println("Edge from " + edge.source + " to " + edge.dest);
+        }
+
+
+	    /*
 		Grid grid = null;
 		grid = new Grid(1920/11,1080/11);
 
@@ -53,7 +88,7 @@ public class Main {
 
 		long startingTime = System.nanoTime();
 		for (int i = 0; i < nbrOfSamples; i++) {
-			randomTree = generateBFSSpanningTree(graph);
+			randomTree = GenerateBFSSpanningTree(graph);
 
 			rooted = new RootedTree(randomTree,0);
 			// rooted.printStats();
