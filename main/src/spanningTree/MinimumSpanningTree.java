@@ -7,7 +7,11 @@ import src.graphTools.Arc;
 import src.graphTools.Edge;
 import src.graphTools.Graph;
 
-public class SpanningTreeMimimumWeight {
+/**
+ * 3.1 Arbres couvrant de poids minimum aléatoire
+ */
+
+public class MinimumSpanningTree {
 
     public ArrayList<Edge> SpanningTreeMinimumWeight(Graph graph) {
         // Create empty spanning tree
