@@ -74,7 +74,8 @@ public class Main {
 	    //ArrayList<Edge> testList = RandomBreadthFirstSearch.SpanningTree(graph);
 	    //ArrayList<Edge> testList = MinimumSpanningTree.SpanningTree(graph);
 	    //ArrayList<Edge> testList = RandomKruskalAlgorithm.SpanningTree(graph);
-	    ArrayList<Edge> testList = AldousBroderAlgorithm.SpanningTree(graph);
+	    //ArrayList<Edge> testList = AldousBroderAlgorithm.SpanningTree(graph);
+	    ArrayList<Edge> testList = WilsonAlgorithm.SpanningTree(graph);
 
 		System.out.println("\nGraph :\n");
 	    for (int i = 0 ; i < graph.order; i++) {
