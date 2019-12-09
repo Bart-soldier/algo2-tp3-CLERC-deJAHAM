@@ -42,7 +42,7 @@ public class AldousBroderAlgorithm {
             if (!visited.contains(randomNeighbor)) {
                 // Add the random neighbor to the list of visited vertices
                 visited.add(randomNeighbor);
-                // And add an edge connecting the vertex and the random neighbor to the spanning tree
+                // Add an edge connecting the vertex and the random neighbor to the spanning tree
                 spanningTree.add(new Edge(vertex, randomNeighbor, 0));
                 // The randomNeighbor is now the new vertex
                 vertex = randomNeighbor;
