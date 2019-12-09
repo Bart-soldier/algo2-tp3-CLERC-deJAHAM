@@ -3,10 +3,7 @@ package src;
 import src.graphTools.Arc;
 import src.graphTools.Edge;
 import src.graphTools.Graph;
-import src.spanningTree.BreadthFirstSearch;
-import src.spanningTree.MinimumSpanningTree;
-import src.spanningTree.RandomBreadthFirstSearch;
-import src.spanningTree.RandomKruskalAlgorithm;
+import src.spanningTree.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -76,7 +73,8 @@ public class Main {
 	    //ArrayList<Edge> testList = GenerateBFSSpanningTree(graph);
 	    //ArrayList<Edge> testList = RandomBreadthFirstSearch.SpanningTree(graph);
 	    //ArrayList<Edge> testList = MinimumSpanningTree.SpanningTree(graph);
-	    ArrayList<Edge> testList = RandomKruskalAlgorithm.SpanningTree(graph);
+	    //ArrayList<Edge> testList = RandomKruskalAlgorithm.SpanningTree(graph);
+	    ArrayList<Edge> testList = AldousBroderAlgorithm.SpanningTree(graph);
 
 		System.out.println("\nGraph :\n");
 	    for (int i = 0 ; i < graph.order; i++) {
