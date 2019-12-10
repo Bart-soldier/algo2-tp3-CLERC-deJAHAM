@@ -27,7 +27,7 @@ public class MainStub {
 
 
 
-        return MinimumSpanningTree.SpanningTree(graph);
+        return WilsonAlgorithm.SpanningTree(graph);
     }
 
 
