@@ -14,13 +14,16 @@ import java.util.LinkedList;
 public class RandomBreadthFirstSearch {
 
     // BFS traversal from a given source source
-    public static ArrayList<Edge> SpanningTree(Graph graph) {
+    public static ArrayList<Arc> SpanningTree(Graph graph) {
 
         // Random source
         int source = (int) (Math.random() * graph.order);
 
         // List of edges in the order of the node's discovery
-        ArrayList<Edge> spanningTree = new ArrayList<>();
+        ArrayList<Arc> spanningTree = new ArrayList<>();
+        for(int i = 0; i < graph.order - 1; i++) {
+            spanningTree.add(null);
+        }
 
         // Mark all the vertices as not discovered
         boolean[] discovered = new boolean[graph.order];
@@ -35,21 +38,26 @@ public class RandomBreadthFirstSearch {
         // While there are still some nodes in the queue
         while (queue.size() != 0)
         {
-            // Dequeue a vertex from queue in a random fashion
-            int randomQueueIndex = (int) (Math.random() * queue.size());
-            source = queue.get(randomQueueIndex);
-            queue.remove(randomQueueIndex);
+            // Dequeue a vertex from queue
+            source = queue.poll();
 
 
             // Look at every arc going out of that vertex
-            for(Edge outgoingArcOfSource : graph.adjacency.get(source)) {
+            for(Arc outgoingArcOfSource : graph.outAdjacency.get(source)) {
                 // Get the destination of the current arc
-                int destination = outgoingArcOfSource.dest;
-                if(destination == source) destination=outgoingArcOfSource.source;
+                int destination = outgoingArcOfSource.edge.dest;
+                if(destination == source) destination=outgoingArcOfSource.edge.source;
                 // If that destination has not been discovered yet
                 if(!discovered[destination]) {
+                    int randomIndex;
+
+                    do {
+                        randomIndex = (int) (Math.random() * spanningTree.size());
+                    }
+                    while(spanningTree.get(randomIndex) != null);
+
                     // Add the arc to the spanning tree
-                    spanningTree.add(new Edge(source, destination, 0));
+                    spanningTree.set(randomIndex, outgoingArcOfSource);
                     // Set the destination as discovered
                     discovered[destination] = true;
                     // Add the destination to the queue

@@ -283,12 +283,7 @@ public class RootedTree {
 		int son = arc.getDest();
 		int father = arc.getSource();
 		nodes[son] = new Node(son);
-		try {
-			nodes[father].sons.add(nodes[son]);
-		} catch (NullPointerException e) {
-			nodes[father] = new Node(father);
-			nodes[father].sons.add(nodes[son]);
-		}
+		nodes[father].sons.add(nodes[son]);
 	}	
 
 	

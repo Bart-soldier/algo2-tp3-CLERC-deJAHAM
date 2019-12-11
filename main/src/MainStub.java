@@ -1,5 +1,6 @@
 package src;
 
+import src.graphTools.Arc;
 import src.graphTools.Edge;
 import src.graphTools.Graph;
 import src.spanningTree.*;
@@ -14,20 +15,18 @@ public class MainStub {
     private final static Random gen = new Random();
 
     public static ArrayList<Edge> genTree(Graph graph) {
-		/*ArrayList<Edge> randomTree;
-
-		// TOOO : modifier l'algorithme utiliser ici.
+		ArrayList<Edge> randomTree;
 
 		// Non-random BFS
 		ArrayList<Arc> randomArcTree =
-				BreadthFirstSearch.generateSpanningTree(graph,0);
+				WilsonAlgorithm.SpanningTree(graph);
+                //BreadthFirstSearch.generateSpanningTree(graph, 0);
 		randomTree = new ArrayList<>();
 		for (Arc a : randomArcTree) randomTree.add(a.edge);
-*/
 
 
 
-        return WilsonAlgorithm.SpanningTree(graph);
+        return randomTree;
     }
 
 

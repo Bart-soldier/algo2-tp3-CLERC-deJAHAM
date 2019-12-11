@@ -1,5 +1,6 @@
 package src.spanningTree;
 
+import src.graphTools.Arc;
 import src.graphTools.Edge;
 import src.graphTools.Graph;
 
@@ -11,9 +12,9 @@ import java.util.ArrayList;
 
 public class AldousBroderAlgorithm {
 
-    public static ArrayList<Edge> SpanningTree(Graph graph) {
+    public static ArrayList<Arc> SpanningTree(Graph graph) {
         // List of edges
-        ArrayList<Edge> spanningTree = new ArrayList<>();
+        ArrayList<Arc> spanningTree = new ArrayList<>();
 
         // List of visited vertices
         ArrayList<Integer> visited = new ArrayList<>();
@@ -29,10 +30,10 @@ public class AldousBroderAlgorithm {
             ArrayList<Integer> neighbors = new ArrayList<>();
 
             // For each edge connected to that vertex
-            for (Edge edge : graph.adjacency.get(vertex)) {
+            for (Arc arc : graph.outAdjacency.get(vertex)) {
                 // Add the connected vertex to the neighbors list
-                if (edge.dest != vertex) neighbors.add(edge.dest);
-                else neighbors.add(edge.source);
+                if (arc.edge.dest != vertex) neighbors.add(arc.edge.dest);
+                else neighbors.add(arc.edge.source);
             }
 
             // Get a random neighbor from the list of neighbors
@@ -43,7 +44,7 @@ public class AldousBroderAlgorithm {
                 // Add the random neighbor to the list of visited vertices
                 visited.add(randomNeighbor);
                 // Add an edge connecting the vertex and the random neighbor to the spanning tree
-                spanningTree.add(new Edge(vertex, randomNeighbor, 0));
+                spanningTree.add(new Arc(new Edge(vertex, randomNeighbor, 0), true));
                 // The randomNeighbor is now the new vertex
                 vertex = randomNeighbor;
             }

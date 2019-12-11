@@ -1,5 +1,6 @@
 package src.spanningTree;
 
+import src.graphTools.Arc;
 import src.graphTools.Edge;
 import src.graphTools.Graph;
 
@@ -11,27 +12,27 @@ import java.util.ArrayList;
 
 public class RandomKruskalAlgorithm {
 
-    public static ArrayList<Edge> SpanningTree(Graph graph) {
+    public static ArrayList<Arc> SpanningTree(Graph graph) {
         // List of edges
-        ArrayList<Edge> spanningTree = new ArrayList<>();
+        ArrayList<Arc> spanningTree = new ArrayList<>();
 
         // List of all edges in the graph
-        ArrayList<Edge> graphEdges = new ArrayList<>();
+        ArrayList<Arc> graphEdges = new ArrayList<>();
 
         // For each vertex in the graph
         for(int vertex = 0 ; vertex < graph.order; vertex++) {
             // For each edge of that vertex
-            for(Edge edge : graph.adjacency.get(vertex)) {
+            for(Arc arc : graph.outAdjacency.get(vertex)) {
                 // If the edge isn't already in the list
-                if(!graphEdges.contains(edge)) {
+                if(!graphEdges.contains(arc)) {
                     // Add it to the list
-                    graphEdges.add(edge);
+                    graphEdges.add(arc);
                 }
             }
         }
 
         // List of all edges in the graph in a random order
-        ArrayList<Edge> randomEdges = new ArrayList<>();
+        ArrayList<Arc> randomEdges = new ArrayList<>();
 
         // Initialize randomEdges
         while(graphEdges.size() > 0) {
@@ -52,12 +53,12 @@ public class RandomKruskalAlgorithm {
 
         // While we haven't look at all of the graph's edges
         while(randomEdges.size() > 0) {
-            Edge edge = randomEdges.remove(0);
+            Arc arc = randomEdges.remove(0);
 
             // Get the farthest predecessor from the source
-            int sourcePredecessor = parent(predecessor, edge.source);
+            int sourcePredecessor = parent(predecessor, arc.edge.source);
             // Get the farthest predecessor from the dest
-            int destPredecessor = parent(predecessor, edge.dest);
+            int destPredecessor = parent(predecessor, arc.edge.dest);
 
             // If the sourcePredecessor is the same as the destPredecessor, i.e. they converge towards the same vertex
             if(sourcePredecessor == destPredecessor){
@@ -65,7 +66,7 @@ public class RandomKruskalAlgorithm {
             }
             else {
                 // Otherwise we don't have a cycle so we add the edge to the spanning tree
-                spanningTree.add(edge);
+                spanningTree.add(arc);
                 // We update the predecessor table
                 int newSourcePredecessor = parent(predecessor, sourcePredecessor);
                 int newDestPredecessor = parent(predecessor, destPredecessor);
